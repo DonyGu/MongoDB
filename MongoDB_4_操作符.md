@@ -35,6 +35,15 @@
 + e.g. 显示第一个 `hobby db.class.find({},{hobby:{$slice:1}})`
 + e.g. 跳过第一项，显示后两项 `hobby db.class.find({},{hobby:{$slice:[1,2]}})`
 
+## 修改器操作符
+|序号|符号| 含义|
+|--|--|--|
+|1|$set|修改数据同时有增加域的作用|
+|2|$unset|删除一个域|
+|3|$rename|修改一个域的名称|
++ e.g.: 删除a的age域 `db.class.update({name:'a'},{$unset:{age:0}})`
++ e.g.: 将文档中的所有的sex域修改为gender `db.class.update({},{$rename:{sex:'gender'}},false,true)`
+
 ## 其他
 |序号|符号| 含义|
 |--|--|--|

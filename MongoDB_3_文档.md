@@ -76,3 +76,14 @@
     + 参数：
         + query：同find
         + justOne:bool值，是否删除第一条匹配到的文档，默认false。
+
+## 更新文档
++ update()
+    + `db.collection_name.update(query,update,upsert,multi)`
+    + 功能：更新一个文档数据
+    + 参数：
+        + query：定位要更新的数据，与find用法相同
+        + update: 将数据更新为什么，相当于set，需要配合修改器操作符来使用
+        + upsert: bool值，默认false，表示当定位的文档不存在则无法修改。如果设置为true，表示如果定位的文档不存在则插入这条文档。
+        + multi：bool值，默认为false，如果query匹配的文档有多条只修改第一条。如果设置为true，则修改所有匹配到的文档。
+        + e.g.: `db.class.update({name:'a'},{$set{age:19}})`
