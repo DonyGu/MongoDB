@@ -41,8 +41,25 @@
 |1|$set|修改数据同时有增加域的作用|
 |2|$unset|删除一个域|
 |3|$rename|修改一个域的名称|
+|4|$inc|对某个域的的值进行加减修改|
+|5|$mul|对某个域的的值进行乘法修改|
+|6|$min|设定最小值，查询到的域值小于设定值不变，否则设为min值|
+|7|$max|设定最大值，查询到的域值大于设定值不变，否则设为max值|
+
 + e.g.: 删除a的age域 `db.class.update({name:'a'},{$unset:{age:0}})`
 + e.g.: 将文档中的所有的sex域修改为gender `db.class.update({},{$rename:{sex:'gender'}},false,true)`
+
+## 数组修改器操作符
+|序号|符号| 含义|
+|--|--|--|
+|1|$push|向数组中增加一项|
+|2|$pushAll|向数组增加多项|
+|3|$pull|数组中删除一个元素|
+|4|$pullAll|数组中删除多个元素|
+|5|$pop|弹出数组两端弹出元素，1最后一个元素，-1第一个元素|
+|6|$addToSet|无重复添加元素，push可以添加重复项|
+
++ e.g. 添加多个hobby `db.class.update({name:'a'},{$pushAll:{hobby:['sing','football']}})`=`db.class.update({name:'a'},{$push:{hobby:{$each:['sing','football']}}})`
 
 ## 其他
 |序号|符号| 含义|
