@@ -34,7 +34,7 @@
 |唯一索引|唯一索引创建时希望索引的域值有不同的值，也可以通过这个方法限制域值|`db.class.ensureIndex({name:1},{'unique':1})`|
 |覆盖索引|查找时，只获取索引项的内容，而不去连接其他文档内容。这样从索引表就可以到得到查询结果，提高查询效率|索引为name查找项也只有name `db.class.find({name:'a'},{_id:0,name:1})`|
 |稀疏索引(间隙索引)|只针对有指定域的文档创建索引，没有该域的文档不加入索引|`db.class.ensureIndex({age:1},{sparse:true})`|
-|文本索引|使用文本索引可以快速进行文本检索，这在较长的字符串搜索中比较有用，可进行多个关键词匹配，以空格隔开，如搜索内容包含空格，空格需要转义字符(\\"keyword\\"),'-'表示不包含|1. 创建文本索引`db.class.ensureIndex({msg:'text',description:'text'})` 2. 搜索文本索引`db.class.find({$text:{$search:"keyword1 keyword2"}})` 3.删除文本索引 通过getIndex()查看索引名，再通过dropIndex()删除|
+|文本索引|使用文本索引可以快速进行文本检索，这在较长的字符串搜索中比较有用，可进行多个关键词匹配，以空格隔开，如搜索内容包含空格，空格需要转义字符(\\"keyword\\"),'-'表示不包含|1. 创建文本索引`db.class.ensureIndex({msg:'text',description:'text'})`  2. 检索(包含"keyword1"或者"key word 2"且不包含"keyword3") `db.class.find({$text:{$search:"keyword1 \"key word 2\" -keyword3"}})` 3.删除文本索引 通过getIndex()查看索引名，再通过dropIndex()删除|
 
 ## 索引约束
 1. 影响插入，删除，修改数据的效率。当数据发生修改时，索引必须同步更新。
