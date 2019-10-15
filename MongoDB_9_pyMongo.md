@@ -35,5 +35,29 @@
 
 ## 文件存储
 ```
+#!/usr/bin/env python3
 
+import pymongo
+import bson.binary
+
+#数据库不存在自动创建
+conn=pymongo.MongoClient('localhost',27017)
+db=conn.savefile
+mySet=db['image']
+
+file='file.png'
+#存储
+f=open(file,'rb')
+dic=dict(content=bson.binary.Binary(f.read()),filename='img.png')
+
+#插入文档
+mySet.save(dic)
+
+#提取文件
+data=mySet.find_one({'filename':'img.png'})
+
+with open('img.png','wb')as f:
+    f.write(data['content'])
+conn.close()
+#print(mySet)
 ```
